@@ -1,9 +1,12 @@
-# Godot-specific ignores
-.godot/
+# .gitignore for Godot 4
 .import/
-export_presets.cfg
-
-# Mono/C# specific ignores (if using C#)
-.mono/
-data_*/
-mono_crash_*.log
+.export/
+.export_presets.cfg
+*.import
+.godot/
+.godot/*.cfg
+.godot/*.bin
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
