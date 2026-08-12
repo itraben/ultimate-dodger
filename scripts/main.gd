@@ -4,8 +4,8 @@ extends Node2D
 @export var fast_multiplier: float = 1.5
 
 var is_slow: bool = false
-onready var player := get_node_or_null("Player")
-onready var toggle_button := get_node_or_null("CanvasLayer/Control/ToggleButton")
+@onready var player := get_node_or_null("Player")
+@onready var toggle_button := get_node_or_null("CanvasLayer/Control/ToggleButton")
 
 func _ready() -> void:
 	print("Main: _ready")
