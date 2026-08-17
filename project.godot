@@ -2,3 +2,9 @@
 config_version=4
 name="Ultimate Dodger"
 run/main_scene="res://scenes/Main.tscn"
+
+[display/window]
+size/width=720
+size/height=1280
+stretch/mode="2d"
+stretch/aspect="keep_height"
