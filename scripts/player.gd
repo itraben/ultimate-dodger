@@ -7,6 +7,7 @@ var speed_multiplier: float = 1.0
 
 func _ready() -> void:
 	print("Player: _ready — script=", get_script())
+	print("Player: runtime radius =", radius)
 	var sprite = get_node_or_null("Sprite")
 	if sprite == null:
 		push_error("Player: Sprite child not found. Add a Sprite2D named 'Sprite' as a child of Player.")
@@ -27,8 +28,8 @@ func _process(delta: float) -> void:
 	# Move horizontally and bounce on screen edges
 	position += velocity * base_speed * speed_multiplier * delta
 
-	var view_w := get_viewport_rect().size.x
-	var half := radius
+	var view_w: float = get_viewport_rect().size.x
+	var half: int = radius
 
 	if view_w > 0:
 		if position.x - half < 0:
@@ -43,15 +44,16 @@ func set_speed_multiplier(m: float) -> void:
 
 # Helper to create a circular placeholder texture (no external asset required)
 func _create_circle_texture(r: int, color: Color) -> ImageTexture:
-	var size := int(r * 2)
-	var img := Image.new()
+	var rr: int = max(1, int(r))   # ensure radius >= 1
+	var size: int = rr * 2
+	print("Player: creating circle texture size=", size, " (radius=", rr, ")")
+	var img = Image.new()
 	img.create(size, size, false, Image.FORMAT_RGBA8)
-	# set pixels directly (no lock/unlock in Godot 4)
 	for y in range(size):
 		for x in range(size):
-			var dx := x - r
-			var dy := y - r
-			if dx * dx + dy * dy <= r * r:
+			var dx: int = x - rr
+			var dy: int = y - rr
+			if dx * dx + dy * dy <= rr * rr:
 				img.set_pixel(x, y, color)
 			else:
 				img.set_pixel(x, y, Color(0, 0, 0, 0))
